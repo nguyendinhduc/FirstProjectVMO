@@ -15,6 +15,7 @@ public class ShapeDrawer {
 
     }
     public void drawBalancedBorderedTriangle(int h){
+        System.out.println("Ahihi day la do ngoc");
         for (int i = 1; i <= h; i++) {
 
             for (int j = h; j >= i; j--) {
