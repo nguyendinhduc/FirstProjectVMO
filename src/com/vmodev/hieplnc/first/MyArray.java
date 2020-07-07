@@ -36,12 +36,13 @@ public class MyArray {
     }
 
     public void subArrayIncrease(){
+        System.out.println("Get increase sub array:");
         int size = array.size();
         int min = array.get(0);
         int count = 0;
         for(int i = 0; i < size; i++){
             if(array.get(i) <= min){
-                System.out.println("\nSub array " + Integer.toString(count) + " :");
+                System.out.println("\nSub array " + count + " :");
                 count++;
             }
             min = array.get(i);
@@ -50,9 +51,30 @@ public class MyArray {
         }
     }
 
+    public void subArrayIncSteadily(){
+        System.out.println("Get increase steadily sub array:");
+        int size = array.size();
+        int min = array.get(0);
+        int hop = 0;
+        int count = 0;
+        for(int i = 0; i < size; i++){
+            if(hop == 0){
+                hop = array.get(i) - min;
+            }
+            if(array.get(i) - min != hop || hop <= 0){
+                System.out.println("\nSub array " + count + " :");
+                count++;
+                hop = 0;
+            }
+            min = array.get(i);
+            System.out.print(array.get(i));
+            System.out.print(" ");
+        }
+    }
+
     public static void main(String[] args){
-        ArrayList<Integer> arrayList = new ArrayList<Integer>(Arrays.asList(1,2,4,5,7,4,6,7,2,1));
+        ArrayList<Integer> arrayList = new ArrayList<Integer>(Arrays.asList(1,2,4,5,7,4,6,8,2,1));
         MyArray obj = new MyArray(arrayList);
-        obj.subArrayIncrease();
+        obj.subArrayIncSteadily();
     }
 }
