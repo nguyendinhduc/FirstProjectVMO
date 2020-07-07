@@ -1,5 +1,6 @@
 package com.vmodev.hieplnc.first;
 
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.lang.Math;
 import java.util.Arrays;
@@ -72,9 +73,46 @@ public class MyArray {
         }
     }
 
+    private int sumArray(ArrayList<Integer> temp){
+        int result = 0;
+        for(Integer i : temp){
+            result += i;
+        }
+        return result;
+    }
+
+    private void displayArray(ArrayList<Integer> temp){
+        System.out.println("Array List: ");
+        for(Integer i : temp){
+            System.out.print(i.toString() + " ");
+        }
+        System.out.println("");
+    }
+
+    private void rcsArray(int pos, int num, ArrayList<Integer> temp, int target){
+        int size = array.size();
+        for(int i = pos; i < size; i++){
+            if(num == 0){
+                if(sumArray(temp) + array.get(i) == target) {
+                    ArrayList<Integer> finalArray = new ArrayList(temp);
+                    finalArray.add(array.get(i));
+                    displayArray(finalArray);
+                }
+            } else{
+                ArrayList<Integer> conArray = new ArrayList(temp);
+                conArray.add(array.get(i));
+                rcsArray(i + 1, num - 1, conArray, target);
+            }
+        }
+    }
+
+    public void listHasSumEqual(int M){
+        rcsArray(0, 1, new ArrayList<Integer>(), M);
+    }
+
     public static void main(String[] args){
-        ArrayList<Integer> arrayList = new ArrayList<Integer>(Arrays.asList(1,2,4,5,7,4,6,8,2,1));
+        ArrayList<Integer> arrayList = new ArrayList<Integer>(Arrays.asList(1,2,4,5,7,4,6,8));
         MyArray obj = new MyArray(arrayList);
-        obj.subArrayIncSteadily();
+        obj.listHasSumEqual(9);
     }
 }
