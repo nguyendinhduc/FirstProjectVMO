@@ -107,7 +107,10 @@ public class MyArray {
     }
 
     public void listHasSumEqual(int M){
-        rcsArray(0, 1, new ArrayList<Integer>(), M);
+        int size = array.size();
+        for(int i = 0; i < size; i++) {
+            rcsArray(0, i, new ArrayList<Integer>(), M);
+        }
     }
 
     public static void main(String[] args){
