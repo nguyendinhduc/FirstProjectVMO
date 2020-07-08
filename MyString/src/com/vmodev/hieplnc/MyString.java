@@ -80,6 +80,41 @@ public class MyString {
         return tempS;
     }
 
+    public String revertWord(){
+        int state = 0;
+        int len = varString.length();
+        String tempS = "";
+        String revertTempS = "";
+        for(int i = 0; i < len; i++){
+            char tempChar = varString.charAt(i);
+
+            if(state == 0 && !isSpace(tempChar)){
+                state = 1;
+            } else if(state == 1 && isSpace(tempChar)){
+                state = 0;
+                tempS += revertString(revertTempS);
+                revertTempS = "";
+            }
+
+            if(state == 0) tempS += tempChar;
+            else revertTempS += tempChar;
+
+            if(i == len - 1 && state == 1){
+                tempS += revertString(revertTempS);
+            }
+        }
+        return tempS;
+    }
+
+    private static String revertString(String value){
+        int len = value.length();
+        String rst = "";
+        for(int i = len - 1; i >= 0; i--){
+            rst += value.charAt(i);
+        }
+        return rst;
+    }
+
     private  static boolean isSpace(char value){
         return value == ' ' || value == '\t';
     }
