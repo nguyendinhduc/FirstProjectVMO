@@ -1,5 +1,7 @@
 package com.vmodev.hieplnc;
 
+import java.util.ArrayList;
+
 public class MyString {
     private final String varString;
 
@@ -104,6 +106,39 @@ public class MyString {
             }
         }
         return tempS;
+    }
+
+    public int sumNumber(){
+        ArrayList<Integer> num = new ArrayList<>();
+        String tempStringNum = "";
+        int state = 0;
+        int len = varString.length();
+        for(int i = 0; i < len; i++){
+            char tempChar = varString.charAt(i);
+
+            if(state == 0 && isDigit(tempChar)){
+                state = 1;
+            } else if(state == 1 && !isDigit(tempChar)){
+                state = 0;
+                num.add(Integer.parseInt(tempStringNum));
+                tempStringNum = "";
+            }
+
+            if(state == 1) tempStringNum += tempChar;
+
+            if(state == 1 && i == len - 1) num.add(Integer.parseInt(tempStringNum));
+        }
+
+        int rslt = 0;
+        for(Integer i : num){
+            rslt += i;
+        }
+        return rslt;
+    }
+
+    private static boolean isDigit(char value){
+        int num = value - '0';
+        return num <= 9 && num >= 0;
     }
 
     private static String revertString(String value){
