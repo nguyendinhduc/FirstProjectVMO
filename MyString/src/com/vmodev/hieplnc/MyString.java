@@ -235,6 +235,12 @@ public class MyString {
         System.out.println(value);
     }
 
+    public static int calculate2String(String numA, String numB, String operator){
+        String expression = numA + operator + numB;
+        MyString calculator = new MyString(expression);
+        return calculator.calculateString();
+    }
+
     public static void display(String value){
         System.out.println("Display integer:");
         System.out.println(value);
