@@ -2,6 +2,7 @@ package com.vmodev.hieplnc;
 
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 
 public class MyString {
@@ -143,7 +144,9 @@ public class MyString {
     }
 
     public String normalizeString(){
-        return null;
+        String normalized = Normalizer.normalize(varString, Normalizer.Form.NFD);
+        String result = normalized.replaceAll("[^\\p{ASCII}]", "");
+        return result;
     }
 
     private ArrayList<Integer> getOperatorInString(){
