@@ -66,12 +66,18 @@ public class MyString {
     }
 
     public String intellijFirstLetter(){
-        int state = 1;
+        int state = 0;
         int len = varString.length();
-        String tempS = new String(varString);
+        String tempS = new String();
         for(int i = 0; i < len; i++){
-//            if(!isSpace(tempS.charAt(i)) && state == 1)
+            char tempChar = varString.charAt(i);
+            if(state == 0 && !isSpace(tempChar)){
+                tempChar = Character.toUpperCase(tempChar);
+                state = 1;
+            } else if(state == 1 && isSpace(tempChar)) state = 0;
+            tempS += tempChar;
         }
+        return tempS;
     }
 
     private  static boolean isSpace(char value){
