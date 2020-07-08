@@ -1,4 +1,4 @@
 .idea
-FirstJava.iml
+*.iml
 out
 target
