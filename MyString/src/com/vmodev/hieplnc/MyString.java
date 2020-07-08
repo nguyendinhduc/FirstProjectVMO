@@ -142,6 +142,10 @@ public class MyString {
         return rslt;
     }
 
+    public String normalizeString(){
+        return null;
+    }
+
     private ArrayList<Integer> getOperatorInString(){
         ArrayList<Integer> operator = new ArrayList<>();
         int len = varString.length();
@@ -171,6 +175,12 @@ public class MyString {
 
         int len = num.size();
         int result = num.get(0);
+        int valueChecker;
+        if(getOperator(varString.charAt(0)) >= 0){
+            result = operator.get(0) == 1 ? result : -1 * result;
+            operator.remove(0);
+        }
+
         for(int i = 1; i < len; i++){
             if(operator.get(i - 1) == 1){
                 result += num.get(i);
