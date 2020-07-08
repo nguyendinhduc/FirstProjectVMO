@@ -1,5 +1,7 @@
 package com.vmodev.hieplnc;
 
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+
 import java.util.ArrayList;
 
 public class MyString {
@@ -108,7 +110,7 @@ public class MyString {
         return tempS;
     }
 
-    public int sumNumber(){
+    private ArrayList<Integer> getNumInString(){
         ArrayList<Integer> num = new ArrayList<>();
         String tempStringNum = "";
         int state = 0;
@@ -128,12 +130,61 @@ public class MyString {
 
             if(state == 1 && i == len - 1) num.add(Integer.parseInt(tempStringNum));
         }
+        return num;
+    }
 
+    public int sumNumber(){
+        ArrayList<Integer> num = getNumInString();
         int rslt = 0;
         for(Integer i : num){
             rslt += i;
         }
         return rslt;
+    }
+
+    private ArrayList<Integer> getOperatorInString(){
+        ArrayList<Integer> operator = new ArrayList<>();
+        int len = varString.length();
+        int state = 0;
+        int decider = 1;
+        for(int i = 0; i < len; i++){
+            char tempChar = varString.charAt(i);
+            if(state == 0 && getOperator(tempChar) >= 0){
+                state = 1;
+            } else if(state == 1 && getOperator(tempChar) < 0){
+                state = 0;
+                operator.add(decider);
+                decider = 1;
+            }
+            if(state == 1) decider *= getOperator(tempChar);
+
+            if(state == 1 && i == len - 1){
+                operator.add(decider);
+            }
+        }
+        return operator;
+    }
+
+    public int calculateString(){
+        ArrayList<Integer> num = getNumInString();
+        ArrayList<Integer> operator = getOperatorInString();
+
+        int len = num.size();
+        int result = num.get(0);
+        for(int i = 1; i < len; i++){
+            if(operator.get(i - 1) == 1){
+                result += num.get(i);
+            } else {
+                result -= num.get(i);
+            }
+        }
+        return result;
+    }
+
+    private static int getOperator(char value){
+        if(value == '+') return 1;
+        else if(value == '-') return 0;
+        return -1;
     }
 
     private static boolean isDigit(char value){
