@@ -1,6 +1,6 @@
 package com.vmodev.first;
 
-public class PrimeNumber {
+class PrimeNumber {
 
     //In ra các số nguyên tố trong mảng
     public static boolean isPrime(int n) {
