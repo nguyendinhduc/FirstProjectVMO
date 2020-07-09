@@ -25,6 +25,28 @@ public class FindPrime {
             }
         }
     }
+    public boolean CompareElement(int a , int b){
+        if(a<b){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public void printSubArrays(int[] arrInt){
+        int length = arrInt.length;
+        for(int i=0 ; i<length; i++){
+            if((i+1)<length && CompareElement(arrInt[i], arrInt[i+1])){
+                System.out.print("Subarray :" + arrInt[i] );
+                while(i+1<length && CompareElement(arrInt[i],arrInt[i+1])){
+                    System.out.print(" " + arrInt[i+1]);
+                    i++;
+                }
+
+            }
+            System.out.println();
+        }
+    }
 
 
 
