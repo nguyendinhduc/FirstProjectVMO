@@ -1,6 +1,7 @@
 package com.vmodev.first;
 
 public class Student {
+
     private String  name;
     private int     age;
     private float   point;
@@ -28,4 +29,12 @@ public class Student {
     public void setPoint(float point) {
         this.point = point;
     }
+
+
+    public void printInfo(){
+        System.out.println("name: "+name);
+        System.out.println("age: "+age);
+        System.out.println("point: "+point);
+    }
+
 }
