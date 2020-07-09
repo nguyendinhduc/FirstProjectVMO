@@ -4,6 +4,9 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
         MyString test = new MyString("hello viet nam");
-        test.display(test.calculate2String("23", "77", "+"));
+        test.display(test.calculateString("20", "4", "*"));
+
+//        CheckerMath myChecker = new CheckerMath();
+//        System.out.println(myChecker.checkValidMath(")()(())"));
     }
 }
