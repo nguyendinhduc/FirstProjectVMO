@@ -15,5 +15,3 @@ public class CheckerMath{
         }
         if(close != open) return false;
         return true;
-    }
-}
