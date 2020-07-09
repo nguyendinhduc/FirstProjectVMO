@@ -235,10 +235,83 @@ public class MyString {
         System.out.println(value);
     }
 
-    public static int calculate2String(String numA, String numB, String operator){
-        String expression = numA + operator + numB;
-        MyString calculator = new MyString(expression);
-        return calculator.calculateString();
+    private String sumString(String numA, String numB){
+        int buff = 0;
+        int len = numA.length();
+        String result = "";
+        for(int i = len - 1; i >= 0; i--){
+            int digit = numA.charAt(i) + numB.charAt(i) - 2 * '0' + buff;
+            result = ((char) ((digit % 10) + '0')) + result;
+            buff = digit / 10;
+        }
+        if(buff != 0) result = '1' + result;
+        return result;
+    }
+
+    private String minusString(String numA, String numB){
+        int buff = 0;
+        int d_A, d_B;
+        int len = numA.length();
+        String result = "";
+        for(int i = len - 1; i >= 0; i--){
+            d_A = numA.charAt(i) - '0';
+            d_B = numB.charAt(i) - '0' + buff;
+            if(d_A < d_B) {
+                d_A += 10;
+                buff = 1;
+            } else{
+                buff = 0;
+            }
+            result = (char) (d_A - d_B + '0') + result;
+        }
+        return result;
+    }
+
+    private String multiplyString(String numA, String numB){
+        int buff = 0;
+        String zero = "";
+        String finalMulti = "0";
+        String tempMulti = "";
+        int len = numA.length();
+        for(int i = len - 1; i >= 0; i--){
+            for(int j = len - 1; j >= 0; j--){
+                int multiValue= (numA.charAt(j) - '0') * (numB.charAt(i) - '0') + buff;
+                tempMulti += (char) (multiValue % 10 + '0') + tempMulti;
+                buff = multiValue / 10;
+            }
+            if(buff != 0) tempMulti += (char) (buff + '0') + tempMulti;
+            tempMulti += zero;
+            System.out.println(tempMulti);
+            zero += "0";
+            finalMulti = calculateString(finalMulti, tempMulti, "+");
+            tempMulti = "";
+        }
+        return finalMulti;
+    }
+
+    public String calculateString(String numA, String numB, String operator){
+        int lenA = numA.length();
+        int lenB = numB.length();
+
+        // padding zero
+        int interval = lenA - lenB;
+        if(lenA < lenB) {
+            interval *= -1;
+            for(int i = 0; i < interval; i++){
+                numA = '0' + numA;
+            }
+            String temp = numA;
+            numA = numB;
+            numB = temp;
+        } else{
+            for(int i = 0; i < interval; i++){
+                numB = '0' + numB;
+            }
+        }
+        if(operator.equals("+")) return sumString(numA, numB);
+        else if(operator.equals("-")) return minusString(numA, numB);
+        else if(operator.equals("*")) return multiplyString(numA, numB);
+        else return null;
     }
 
     public static void display(String value){
