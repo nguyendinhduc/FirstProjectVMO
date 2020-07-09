@@ -1,6 +1,7 @@
 package com.vmodev.first;
 
-class PrimeNumber {
+
+public class ArrayExcercise {
 
     //In ra các số nguyên tố trong mảng
     public static boolean isPrime(int n) {
