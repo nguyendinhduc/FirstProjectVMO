@@ -11,5 +11,8 @@ public class Main {
         PrimeNumber primeNumber = new PrimeNumber();
         primeNumber.inputPrime(a);
 
+        DemoList.createStudent();
+
+
     }
 }
