@@ -2,12 +2,13 @@ package trung.lbq;
 
 import java.util.Scanner;
 
-public class Main {
+import static trung.lbq.CheckMath.checkValidMath;
+
+public class Main1 {
     public static void main(String[] args){
-        System.out.println("Enter String: ");
         Scanner sc = new Scanner(System.in);
-        MyString myString= new MyString();
-        myString.s = sc.nextLine();
-        MyString.ASCII(myString.s);
+        MyString ex2 = new MyString();
+        ex2.s = sc.nextLine();
+        MyString.findSum(ex2.s);
     }
 }
