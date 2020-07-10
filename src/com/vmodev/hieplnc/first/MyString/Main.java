@@ -1,4 +1,4 @@
-package com.vmodev.hieplnc;
+package com.vmodev.hieplnc.first.MyString;
 
 public class Main {
     public static void main(String[] args) {

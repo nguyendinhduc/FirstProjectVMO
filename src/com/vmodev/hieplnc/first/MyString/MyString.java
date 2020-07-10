@@ -1,6 +1,4 @@
-package com.vmodev.hieplnc;
-
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+package com.vmodev.hieplnc.first.MyString;
 
 import java.text.Normalizer;
 import java.util.ArrayList;

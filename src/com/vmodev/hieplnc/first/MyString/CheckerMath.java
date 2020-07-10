@@ -1,4 +1,4 @@
-package com.vmodev.hieplnc;
+package com.vmodev.hieplnc.first.MyString;
 
 public class CheckerMath{
     public static boolean checkValidMath(String strBracket){
