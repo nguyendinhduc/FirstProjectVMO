@@ -265,24 +265,36 @@ public class MyString {
         return result;
     }
 
-    private String multiplyString(String numA, String numB){
+    private String multiStringWithDigit(String numA, char numB){
+        int multi = numB - '0';
+        int begin = numA.length() - 1;
+        String result = "";
         int buff = 0;
-        String zero = "";
-        String finalMulti = "0";
-        String tempMulti = "";
-        int len = numA.length();
-        for(int i = len - 1; i >= 0; i--){
-            for(int j = len - 1; j >= 0; j--){
-                int multiValue= (numA.charAt(j) - '0') * (numB.charAt(i) - '0') + buff;
-                tempMulti += (char) (multiValue % 10 + '0') + tempMulti;
-                buff = multiValue / 10;
+        for(int i = begin; i >= 0; i--){
+            int value = (numA.charAt(i) - '0') * multi + buff;
+            result = (char) (value % 10 + '0') + result;
+            buff = value / 10;
+        }
+        if(buff != 0) result = (char) (buff + '0') + result;
+        return result;
+    }
+
+    private String multiplyString(String numA, String numB){
+        for(int i = 0; i < numB.length(); i++){
+            if(numB.charAt(i) != '0'){
+                numB = numB.substring(i);
+                break;
             }
-            if(buff != 0) tempMulti += (char) (buff + '0') + tempMulti;
-            tempMulti += zero;
-            System.out.println(tempMulti);
+        }
+        String finalMulti = "0";
+        String tempValue = "";
+        String zero ="";
+        int begin = numB.length() - 1;
+        for(int i = begin; i >= 0; i--){
+            tempValue = multiStringWithDigit(numA, numB.charAt(i));
+            tempValue += zero;
+            finalMulti = calculateString(finalMulti, tempValue, "+");
             zero += "0";
-            finalMulti = calculateString(finalMulti, tempMulti, "+");
-            tempMulti = "";
         }
         return finalMulti;
     }
