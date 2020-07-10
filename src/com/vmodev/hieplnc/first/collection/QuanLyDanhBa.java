@@ -41,17 +41,18 @@ public class QuanLyDanhBa {
     private boolean checkTenGanDung(String keyword, String sentence){
         int index = 0;
         for(int i = 0; i < sentence.length(); i++){
-            if(keyword.charAt(index) == sentence.charAt(i)) index++;
+            if((keyword.charAt(index) + "").toLowerCase().equals((sentence.charAt(i) + "").toLowerCase())) index++;
         }
         return index == keyword.length();
     }
 
-    public void searchDanhBa(String name){
+    public List<DanhBa> searchDanhBa(String name){
         List<DanhBa> listTimKiem = new ArrayList<>();
         for(DanhBa i : listDanhBa){
             if(checkTenGanDung(name, i.getName())) listTimKiem.add(i);
         }
         displayList(listTimKiem);
+        return listTimKiem;
     }
 
     public static void displayList(List<DanhBa> listDanhBa){
