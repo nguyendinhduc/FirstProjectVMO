@@ -280,12 +280,7 @@ public class MyString {
     }
 
     private String multiplyString(String numA, String numB){
-        for(int i = 0; i < numB.length(); i++){
-            if(numB.charAt(i) != '0'){
-                numB = numB.substring(i);
-                break;
-            }
-        }
+        numB = removeZero(numB);
         String finalMulti = "0";
         String tempValue = "";
         String zero ="";
@@ -299,7 +294,75 @@ public class MyString {
         return finalMulti;
     }
 
+    private String divideString(String numA, String numB){
+        numB = removeZero(numB);
+        String tempNum = "";
+        String result = "";
+        for(int i = 0; i < numA.length(); i++){
+            tempNum += numA.charAt(i);
+            if(isSmaller(numB, tempNum)){
+                String tempDigit = divideSmallNumber(tempNum, numB);
+                result += tempDigit;
+                tempNum = calculateString(tempNum, calculateString(numB, tempDigit, "*"), "-");
+                tempNum = removeZero(tempNum);
+            } else if(isZero(calculateString(numB, tempNum, "-"))){
+                result += "1";
+                tempNum = "";
+            } else{
+                result += "0";
+            }
+        }
+        return removeZero(result);
+    }
+
+    private String removeZero(String num){
+        for(int i = 0; i < num.length(); i++){
+            if(num.charAt(i) != '0'){
+                num = num.substring(i);
+                return num;
+            }
+        }
+        return "";
+    }
+
+    private String divideSmallNumber(String numA, String numB){
+        String tempMulti;
+        for(int i = 1; i < 10; i++){
+            tempMulti = calculateString(numB, Integer.toString(i), "*");
+            if(isSmaller(numA, tempMulti)) return Integer.toString(i - 1);
+            else{
+                if(isZero(calculateString(numA, tempMulti, "-"))) return Integer.toString(i);
+            }
+        }
+        return null;
+    }
+
+    private boolean isZero(String num){
+        for(int i = 0; i < num.length(); i++){
+            if(num.charAt(i) != '0') return false;
+        }
+        return true;
+    }
+
+    private boolean isSmaller(String numA, String numB){
+        numA = removeZero(numA);
+        numB = removeZero(numB);
+        if(numA.length() < numB.length()) return true;
+        else if(numA.length() > numB.length()) return false;
+        for(int i = 0; i < numA.length(); i++){
+            if(numA.charAt(i) < numB.charAt(i)) return true;
+            else if(numA.charAt(i) > numB.charAt(i)) return false;
+        }
+        return false;
+    }
+
     public String calculateString(String numA, String numB, String operator){
+        if(isSmaller(numA, numB)){
+            String temp = numA;
+            numA = numB;
+            numB = temp;
+        }
+
         int lenA = numA.length();
         int lenB = numB.length();
 
@@ -307,12 +370,9 @@ public class MyString {
         int interval = lenA - lenB;
         if(lenA < lenB) {
             interval *= -1;
-            for(int i = 0; i < interval; i++){
+            for (int i = 0; i < interval; i++) {
                 numA = '0' + numA;
             }
-            String temp = numA;
-            numA = numB;
-            numB = temp;
         } else{
             for(int i = 0; i < interval; i++){
                 numB = '0' + numB;
@@ -321,6 +381,7 @@ public class MyString {
         if(operator.equals("+")) return sumString(numA, numB);
         else if(operator.equals("-")) return minusString(numA, numB);
         else if(operator.equals("*")) return multiplyString(numA, numB);
+        else if(operator.equals("/")) return divideString(numA, numB);
         else return null;
     }
 
