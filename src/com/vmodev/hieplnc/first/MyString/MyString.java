@@ -322,7 +322,7 @@ public class MyString {
                 return num;
             }
         }
-        return "";
+        return "0";
     }
 
     private String divideSmallNumber(String numA, String numB){
