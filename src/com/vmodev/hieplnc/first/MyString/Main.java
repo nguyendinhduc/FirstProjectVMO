@@ -16,7 +16,9 @@ public class Main {
         mySearch.addString("Do Nhu Minh Ngoc");
         mySearch.addString("Le Thi Hoa Ngoc");
         mySearch.addString("Do Minh Minh Do");
+        mySearch.addString("o to do choi");
+        mySearch.addString("phi thuyen choi Ngoc");
 
-        mySearch.searchString("Ngoc Hoa");
+        mySearch.searchString("choi");
     }
 }
